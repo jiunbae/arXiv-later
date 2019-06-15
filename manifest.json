@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "arXiv later",
     "description": "Read arXiv paper later!",
-    "version": "0.1",
+    "version": "0.3",
     "background": {
         "scripts": [
             "background.js"
