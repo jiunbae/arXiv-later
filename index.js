@@ -1,15 +1,19 @@
+const storage = chrome.storage.local;
+
 function remove() {
     const arxiv_id = this.dataset.id;
 
-    chrome.storage.local.get(['id_list'], items => {
+    storage.get(['id_list'], items => {
         items.id_list.splice(items.id_list.indexOf(arxiv_id), 1);
-        chrome.storage.local.set(items, () => {
-            const element = Array.from(document.getElementsByClassName('card'))
-                                 .filter(tag => tag.dataset.id == arxiv_id)
-                                 .shift();
-            
-            element.parentNode.removeChild(element);
-        });
+        storage.set(items, () => (
+            storage.remove(arxiv_id, () => {
+                const element = Array.from(document.getElementsByClassName('card'))
+                    .filter(tag => tag.dataset.id == arxiv_id)
+                    .shift();
+
+                element.parentNode.removeChild(element);
+            })
+        ));
     });
 }
 
