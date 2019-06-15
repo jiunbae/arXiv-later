@@ -1,3 +1,5 @@
+const storage = chrome.storage.sync;
+
 function getMeta(name, context = document) {
     return Array.from(context.getElementsByTagName('meta'))
                 .filter(tag => tag.name == name)
@@ -15,7 +17,7 @@ function getNow() {
 
 const arxiv_id = getMeta('citation_arxiv_id').content;
 
-chrome.storage.local.get([arxiv_id], items => {
+storage.get([arxiv_id], items => {
     const target = getElement('full-text').getElementsByTagName('UL')[0];
     const button = document.createElement('a');
     const wrapper = document.createElement('li');
@@ -33,23 +35,21 @@ chrome.storage.local.get([arxiv_id], items => {
         const upload_date = getMeta('citation_date').content;
         const save_date = getNow();
 
-        let jsonfile = {};
-        jsonfile[arxiv_id] = JSON.stringify({
-            title, authors, abstract, subject, category, 
-            arxiv_id, pdf_url, upload_date, save_date,
-        });
-
-        chrome.storage.local.set(jsonfile, () => {
+        storage.set({
+            [arxiv_id]: JSON.stringify({
+                title, authors, abstract, subject, category,
+                arxiv_id, pdf_url, upload_date, save_date,
+            })
+        }, () => {
             button.innerHTML = `Keeped (${save_date})`;
         });
 
-        chrome.storage.local.get(['id_list'], items => {
-            let manifest = {};
-            manifest['id_list'] = items.id_list || [];
+        storage.get(['id_list'], items => {
+            const id_list = items.id_list || [];
 
-            if (!manifest['id_list'].includes(arxiv_id)) {
-                manifest['id_list'].push(arxiv_id);
-                chrome.storage.local.set(manifest, () => {
+            if (!id_list.includes(arxiv_id)) {
+                id_list.push(arxiv_id);
+                storage.set({ id_list }, () => {
                     button.innerHTML = `Keeped (${save_date})`;
                 });
             }
