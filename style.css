@@ -1,0 +1,123 @@
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.navbar ul li {
+    float: left;
+}
+
+.navbar ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbar ul li a:hover {
+    background-color: #111;
+}
+
+.navbar ul li.navbar-ending {
+    float: right;
+}
+
+.navbar input[type=text] {
+    font-size: 16px;
+    margin: 5px;
+    padding: 5px;
+    border: 2px solid #eee;
+}
+
+.arxiv {
+    max-width: 1280px;
+    margin: auto;
+    margin-top: 16px;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    float: left;
+    padding: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 256px;
+    margin: 12px;
+    text-align: center;
+    font-family: arial;
+    height: 288px;
+}
+
+.card .close {
+    position: absolute;
+    right: 8px;
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background-color: red;
+}
+
+.card .content {
+    max-height: 256px;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+.card .title {
+    margin: 6px;
+}
+
+.card .authors {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 6px 0px;
+    color: grey;
+    font-size: 16px;
+}
+
+.card .abstract {
+    overflow-y: scroll;
+    margin: 6px 0px;
+    font-size: 12px;
+    height: 128px;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.card .links {
+    position: absolute;
+    width: 100%;
+    bottom: 6px;
+}
+
+.card .links a {
+    float: left;
+    width: 52px;
+    border: none;
+    outline: 0;
+    padding: 4px;
+    margin: 4px;
+    color: white;
+    background-color: #b31b1b;
+    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.card .links a:hover {
+    opacity: 0.5;
+}
+
+.card .links small {
+    position: absolute;
+    bottom: 2px;
+    right: 18px;
+}
