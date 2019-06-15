@@ -43,14 +43,16 @@ chrome.storage.local.get([arxiv_id], items => {
             button.innerHTML = `Keeped (${save_date})`;
         });
 
-        // sync settings
         chrome.storage.local.get(['id_list'], items => {
             let manifest = {};
             manifest['id_list'] = items.id_list || [];
-            manifest['id_list'].push(arxiv_id);
 
-            chrome.storage.local.set(manifest, () => {
-            });
+            if (!manifest['id_list'].includes(arxiv_id)) {
+                manifest['id_list'].push(arxiv_id);
+                chrome.storage.local.set(manifest, () => {
+                    button.innerHTML = `Keeped (${save_date})`;
+                });
+            }
         });
     };
 
